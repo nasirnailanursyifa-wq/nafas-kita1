@@ -130,17 +130,18 @@ export const Footer = () => {
               <span>Kontak</span>
             </h4>
             <div className="space-y-3 max-w-xs mx-auto sm:mx-0">
-              <motion.div
+              <motion.a
+                href="mailto:udarayangsamaa@gmail.com"
                 whileHover={{ x: 5 }}
-                className="flex items-center justify-center sm:justify-start space-x-3 text-gray-500 dark:text-gray-400 group"
+                className="flex items-center justify-center sm:justify-start space-x-3 text-gray-500 dark:text-gray-400 group cursor-pointer"
               >
                 <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-gradient-to-br from-blue-500/10 to-purple-500/10 flex items-center justify-center group-hover:shadow-md transition-all flex-shrink-0">
                   <Mail className="w-4 h-4 text-blue-500" />
                 </div>
                 <span className="text-xs md:text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors break-all">
-                  info@udarayangsama.com
+                  udarayangsamaa@gmail.com
                 </span>
-              </motion.div>
+              </motion.a>
               
               {/* Pesan singkat - Responsif */}
               <div className="mt-4 p-3 md:p-4 rounded-xl bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-100/30 dark:border-blue-800/30">
