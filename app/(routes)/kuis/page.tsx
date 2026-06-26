@@ -234,6 +234,7 @@ const BurstEffect = ({ isCorrect, show }: { isCorrect: boolean | null; show: boo
 }
 
 export default function KuisPage() {
+  const [quizStarted, setQuizStarted] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
   const [showResult, setShowResult] = useState(false)
@@ -290,6 +291,7 @@ export default function KuisPage() {
     setAnswered(false)
     setUserName('')
     setShowCertificate(false)
+    setQuizStarted(false)
   }
 
   const getMessage = () => {
@@ -434,7 +436,87 @@ export default function KuisPage() {
         </motion.div>
 
         <AnimatePresence mode="wait">
-          {!showResult ? (
+          {!quizStarted ? (
+            <motion.div
+              key="welcome"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Card className="shadow-2xl border-0 backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="grid grid-cols-1 md:grid-cols-12 items-stretch">
+                    {/* Sisi Kiri: Deskripsi & Registrasi Nama (7 kolom) */}
+                    <div className="md:col-span-7 p-6 md:p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20 mb-4">
+                          <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+                          <span className="text-[10px] md:text-xs font-bold text-purple-700 dark:text-purple-300">Kuis Edukasi Interaktif</span>
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                          Uji Pengetahuan Campak Anda
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300 text-xs md:text-sm leading-relaxed mb-6">
+                          Uji seberapa dalam pemahaman Anda tentang penyakit campak, cara penularan, dan pencegahannya. Raih skor minimal **80%** untuk mendapatkan sertifikat digital kelulusan resmi!
+                        </p>
+
+                        {/* List Info Kuis */}
+                        <div className="grid grid-cols-2 gap-3 mb-6">
+                          <div className="p-3 bg-blue-500/5 dark:bg-blue-500/10 rounded-xl border border-blue-500/10 flex items-center space-x-2.5">
+                            <span className="text-lg">📋</span>
+                            <div>
+                              <p className="text-[10px] text-gray-500 dark:text-gray-400">Total Soal</p>
+                              <p className="text-xs md:text-sm font-bold text-gray-800 dark:text-gray-200">10 Pilihan Ganda</p>
+                            </div>
+                          </div>
+                          <div className="p-3 bg-purple-500/5 dark:bg-purple-500/10 rounded-xl border border-purple-500/10 flex items-center space-x-2.5">
+                            <span className="text-lg">🏆</span>
+                            <div>
+                              <p className="text-[10px] text-gray-500 dark:text-gray-400">Syarat Kelulusan</p>
+                              <p className="text-xs md:text-sm font-bold text-gray-800 dark:text-gray-200">Skor Min 80%</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Input Nama */}
+                        <div className="mb-6">
+                          <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-2">
+                            Nama Lengkap (untuk sertifikat):
+                          </label>
+                          <input
+                            type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            placeholder="Masukkan nama Anda"
+                            className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                          />
+                        </div>
+                      </div>
+
+                      <Button
+                        onClick={() => setQuizStarted(true)}
+                        disabled={!userName.trim()}
+                        className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-pointer"
+                      >
+                        Mulai Kuis 🚀
+                      </Button>
+                    </div>
+
+                    {/* Sisi Kanan: Cover Gambar Kartun (5 kolom) */}
+                    <div className="md:col-span-5 relative min-h-[220px] md:min-h-full">
+                      <img
+                        src="/images/quiz.jpg"
+                        alt="Kuis Cover"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white/30 via-transparent to-transparent pointer-events-none" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ) : !showResult ? (
             <motion.div
               key="quiz"
               initial={{ opacity: 0, x: 20 }}
