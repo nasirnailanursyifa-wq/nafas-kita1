@@ -458,7 +458,7 @@ export default function KuisPage() {
                           Uji Pengetahuan Campak Anda
                         </h2>
                         <p className="text-gray-600 dark:text-gray-300 text-xs md:text-sm leading-relaxed mb-6">
-                          Uji seberapa dalam pemahaman Anda tentang penyakit campak, cara penularan, dan pencegahannya. Raih skor minimal **80%** untuk mendapatkan sertifikat digital kelulusan resmi!
+                          Uji seberapa dalam pemahaman Anda tentang penyakit campak, cara penularan, dan pencegahannya. Raih skor minimal <span className="font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded">80%</span> untuk mendapatkan sertifikat digital kelulusan resmi!
                         </p>
 
                         {/* List Info Kuis */}
