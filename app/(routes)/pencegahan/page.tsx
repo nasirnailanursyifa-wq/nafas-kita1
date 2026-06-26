@@ -90,18 +90,27 @@ export default function PencegahanPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12"
+          className="mt-12 max-w-3xl mx-auto"
         >
-          <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-0">
+          <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-0 shadow-lg overflow-hidden">
             <CardContent className="p-8">
-              <div className="flex items-center space-x-3">
-                <Shield className="w-8 h-8 text-blue-600 flex-shrink-0" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Ingat!</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Vaksinasi adalah perlindungan terbaik. Jangan tunda vaksinasi untuk diri sendiri dan keluarga.
-                    Konsultasikan dengan tenaga medis untuk jadwal vaksinasi yang tepat.
-                  </p>
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+                <div className="flex items-start space-x-4 flex-grow">
+                  <Shield className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Ingat!</h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                      Vaksinasi adalah perlindungan terbaik. Jangan tunda vaksinasi untuk diri sendiri dan keluarga.
+                      Konsultasikan dengan tenaga medis untuk jadwal vaksinasi yang tepat.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-md border border-white/30 dark:border-gray-800/30">
+                  <img 
+                    src="/images/family.jpg" 
+                    alt="Keluarga Sehat" 
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               </div>
             </CardContent>

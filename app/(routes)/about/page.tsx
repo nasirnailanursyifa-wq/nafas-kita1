@@ -86,17 +86,26 @@ export default function AboutPage() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 max-w-3xl mx-auto"
         >
-          <Card className="bg-gradient-to-r from-blue-500/10 to-green-500/10 border-0">
+          <Card className="bg-gradient-to-r from-blue-500/10 to-green-500/10 border-0 shadow-lg overflow-hidden">
             <CardContent className="p-8">
-              <div className="flex items-start space-x-4">
-                <Heart className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Mengapa Ini Penting?</h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Memahami campak adalah langkah pertama dalam pencegahan. Dengan pengetahuan yang tepat, 
-                    kita dapat melindungi diri sendiri, keluarga, dan komunitas dari penyakit yang dapat 
-                    dicegah ini. Vaksinasi adalah kunci untuk mengakhiri siklus penularan campak.
-                  </p>
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+                <div className="flex items-start space-x-4 flex-grow">
+                  <Heart className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Mengapa Ini Penting?</h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                      Memahami campak adalah langkah pertama dalam pencegahan. Dengan pengetahuan yang tepat, 
+                      kita dapat melindungi diri sendiri, keluarga, dan komunitas dari penyakit yang dapat 
+                      dicegah ini. Vaksinasi adalah kunci untuk mengakhiri siklus penularan campak.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-md border border-white/30 dark:border-gray-800/30">
+                  <img 
+                    src="/images/importance.jpg" 
+                    alt="Pentingnya Imunisasi" 
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               </div>
             </CardContent>

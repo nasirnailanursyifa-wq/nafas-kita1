@@ -110,19 +110,28 @@ export default function GejalaPage() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-12 max-w-3xl mx-auto"
         >
-          <Card className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border-0">
+          <Card className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border-0 shadow-lg overflow-hidden">
             <CardContent className="p-8">
-              <div className="flex items-start space-x-4">
-                <AlertCircle className="w-8 h-8 text-red-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-red-600 dark:text-red-400">
-                    Penting untuk Diketahui
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Jika Anda atau keluarga mengalami gejala-gejala di atas, segera konsultasikan 
-                    dengan tenaga medis profesional. Penanganan dini sangat penting untuk mencegah 
-                    komplikasi serius.
-                  </p>
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+                <div className="flex items-start space-x-4 flex-grow">
+                  <AlertCircle className="w-8 h-8 text-red-500 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-red-600 dark:text-red-400">
+                      Penting untuk Diketahui
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                      Jika Anda atau keluarga mengalami gejala-gejala di atas, segera konsultasikan 
+                      dengan tenaga medis profesional. Penanganan dini sangat penting untuk mencegah 
+                      komplikasi serius.
+                    </p>
+                  </div>
+                </div>
+                <div className="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 relative rounded-2xl overflow-hidden shadow-md border border-white/30 dark:border-gray-800/30">
+                  <img 
+                    src="/images/doctor.jpg" 
+                    alt="Konsultasi Dokter" 
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               </div>
             </CardContent>
