@@ -3,7 +3,7 @@ import { getStats, registerVisit, trackActive } from '@/app/lib/utils/stats'
 
 export async function GET() {
   try {
-    const stats = getStats()
+    const stats = await getStats()
     return NextResponse.json(stats)
   } catch (error) {
     console.error('Error in GET /api/stats:', error)
@@ -21,9 +21,9 @@ export async function POST(request: Request) {
     
     let stats
     if (type === 'visit') {
-      stats = registerVisit(sessionId)
+      stats = await registerVisit(sessionId)
     } else {
-      stats = trackActive(sessionId)
+      stats = await trackActive(sessionId)
     }
     
     return NextResponse.json(stats)
