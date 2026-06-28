@@ -798,8 +798,12 @@ export default function KuisPage() {
                     </div>
                   </div>
                   
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] font-bold text-blue-100/20 select-none pointer-events-none">
-                    {percentage >= 80 ? '⭐' : '📚'}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-500/5 dark:text-blue-400/5 select-none pointer-events-none">
+                    {percentage >= 80 ? (
+                      <Trophy className="w-48 h-48 stroke-[0.5]" />
+                    ) : (
+                      <Award className="w-48 h-48 stroke-[0.5]" />
+                    )}
                   </div>
                 </div>
               </div>
