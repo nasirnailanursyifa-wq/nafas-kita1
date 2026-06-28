@@ -726,7 +726,7 @@ export default function KuisPage() {
                     <Award className="w-10 h-10 text-white" />
                   </div>
                   
-                  <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-wider">
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 tracking-wider">
                     SERTIFIKAT KELULUSAN
                   </h2>
                   
