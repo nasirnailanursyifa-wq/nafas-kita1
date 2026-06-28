@@ -332,17 +332,34 @@ export default function KuisPage() {
   const percentage = Math.round((score / totalQuestions) * 100)
 
   const downloadPDF = async () => {
-    if (!certificateRef.current) return
+    if (!certificateRef.current || !scaleRef.current) return
     
     setIsDownloading(true)
+    
+    // Simpan style penskalan asli agar bisa dikembalikan setelah capture
+    const scaledParent = certificateRef.current.parentElement
+    const originalTransform = scaledParent ? scaledParent.style.transform : ''
+    const originalHeight = scaleRef.current.style.height
+    
     try {
+      // 1. Matikan penskalan sementara di DOM agar html2canvas menangkap ukuran penuh (100% resolusi) tanpa distorsi
+      if (scaledParent) {
+        scaledParent.style.transform = 'none'
+      }
+      scaleRef.current.style.height = 'auto'
+      
+      // Paksa reflow browser agar gaya baru diterapkan secara sinkron sebelum render
+      if (scaledParent) {
+        const _reflow = scaledParent.offsetHeight
+      }
+
       const canvas = await html2canvas(certificateRef.current, {
         scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
-        width: 800,
-        height: 600,
+        width: 732, // Ukuran lebar riil (700px min-width + 32px padding)
+        height: 532, // Ukuran tinggi riil (500px min-height + 32px padding)
       })
       
       const imgData = canvas.toDataURL('image/png')
@@ -354,8 +371,14 @@ export default function KuisPage() {
       pdf.save(`Sertifikat_Campak_${userName}.pdf`)
     } catch (error) {
       console.error('Error downloading PDF:', error)
+    } finally {
+      // 2. Kembalikan style penskalan responsif agar tampilan di layar HP kembali normal
+      if (scaledParent) {
+        scaledParent.style.transform = originalTransform
+      }
+      scaleRef.current.style.height = originalHeight
+      setIsDownloading(false)
     }
-    setIsDownloading(false)
   }
 
   return (
