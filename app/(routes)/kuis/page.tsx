@@ -245,8 +245,10 @@ export default function KuisPage() {
   const [showCertificate, setShowCertificate] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
   const [showBurst, setShowBurst] = useState(false)
+  const [scale, setScale] = useState(1)
   
   const certificateRef = useRef<HTMLDivElement>(null)
+  const scaleRef = useRef<HTMLDivElement>(null)
 
   const totalQuestions = quizData.length
   const question = quizData[currentQuestion]
@@ -258,6 +260,30 @@ export default function KuisPage() {
       return () => clearTimeout(timer)
     }
   }, [answered])
+
+  useEffect(() => {
+    if (!showCertificate) return
+
+    const handleResize = () => {
+      if (!scaleRef.current) return
+      const parentWidth = scaleRef.current.parentElement?.clientWidth || window.innerWidth
+      const targetWidth = 732 // Lebar asli certificateRef (700px + padding 32px)
+      if (parentWidth < targetWidth) {
+        setScale(parentWidth / targetWidth)
+      } else {
+        setScale(1)
+      }
+    }
+
+    // Berikan sedikit jeda waktu agar DOM modal selesai ter-mount
+    const timeoutId = setTimeout(handleResize, 100)
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [showCertificate])
 
   const handleAnswer = (selectedIndex: number) => {
     if (answered) return
@@ -710,7 +736,21 @@ export default function KuisPage() {
         >
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-4xl w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
             
-            <div ref={certificateRef} className="bg-white rounded-xl p-4 w-full" style={{ minWidth: '700px', minHeight: '500px' }}>
+            {/* Wrapper untuk penskalakan sertifikat agar responsif di HP */}
+            <div 
+              ref={scaleRef} 
+              className="w-full overflow-hidden flex items-start justify-center"
+              style={{ height: `${532 * scale}px` }}
+            >
+              <div 
+                style={{ 
+                  transform: `scale(${scale})`, 
+                  transformOrigin: 'top center',
+                  width: '732px',
+                  minWidth: '732px',
+                }}
+              >
+                <div ref={certificateRef} className="bg-white rounded-xl p-4 w-full" style={{ minWidth: '700px', minHeight: '500px' }}>
               <div className="relative border-4 border-double border-blue-500 rounded-2xl p-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 shadow-2xl overflow-hidden">
                 
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-200/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
@@ -808,6 +848,8 @@ export default function KuisPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
             <div className="flex gap-3 mt-4">
               <button
